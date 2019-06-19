@@ -1,0 +1,3 @@
+[submodule "seissol"]
+	path = seissol
+	url = https://github.com/ivotron/seissol
