@@ -1,5 +1,4 @@
-#FROM debian:buster-slim
-FROM ubuntu:xenial
+FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -30,5 +29,3 @@ ENV CPATH=/usr/lib/x86_64-linux-gnu/netcdf/mpi/include
 ADD entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-# scons compiler=gcc netcdf=yes hdf5=yes order=4 parallelization=hybrid -j8
