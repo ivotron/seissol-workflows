@@ -4,7 +4,7 @@ workflow "containers" {
 }
 
 action "build and test" {
-  uses = "./workflows/in-containers/actions/seissol"
+  uses = "./workflows/containerized/actions/seissol"
   args = [
    "compileMode=release",
    "order=6",
