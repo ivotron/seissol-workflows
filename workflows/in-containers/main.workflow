@@ -1,12 +1,20 @@
 workflow "containers" {
   on = "push"
-  resolves = "build"
+  resolves = "build and test"
 }
 
-action "build" {
-  uses = "popperized/scons@master"
-  env = {
-    SCONS_PROJECT_DIR = "seissol/"
-    SCONS_INSTALL_DEPS_SCRIPT = "install_deps.sh",
-  }
+action "build and test" {
+  uses = "./workflows/in-containers/actions/seissol"
+  args = [
+   "compileMode=release",
+   "order=6",
+   "parallelization=hybrid",
+   "netcdf=yes",
+   "hdf5=yes",
+   "commThread=yes",
+   "compiler=gcc",
+   "unitTests=fast",
+   "-j8",
+   "check"
+  ]
 }
