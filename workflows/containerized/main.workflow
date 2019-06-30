@@ -15,7 +15,6 @@ action "build and test" {
    "compiler=gcc",
    "unitTests=fast",
    "-j8",
-   "check"
   ]
 }
 

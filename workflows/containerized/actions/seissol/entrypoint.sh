@@ -10,4 +10,4 @@ fi
 
 cd seissol/
 
-scons -j 32 "$@"
+scons "$@"
