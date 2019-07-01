@@ -4,7 +4,7 @@ workflow "containers" {
 }
 
 action "build and test" {
-  uses = "./workflows/containerized/actions/seissol"
+  uses = "./actions/seissol"
   args = [
    "compileMode=release",
    "order=6",
@@ -20,12 +20,12 @@ action "build and test" {
 
 action "download files"{
   needs = "build and test"
-  uses = "actions/bin/curl@master"
-  runs = ["sh", "-c", "workflows/containerized/scripts/download.sh"]
+  uses = "./actions/seissol"
+  runs = ["sh", "-c", "workflows/tpv33/scripts/download.sh"]
 }
 
 action "execute"{
   needs = "download files"
-  uses = "./workflows/containerized/actions/seissol"
-  runs = ["sh", "-c","workflows/containerized/scripts/execute.sh"]
+  uses = "./actions/seissol"
+  runs = ["sh", "-c","workflows/tpv33/scripts/execute.sh"]
 }
