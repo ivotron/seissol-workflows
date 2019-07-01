@@ -3,7 +3,7 @@ workflow "containers" {
   resolves = "execute"
 }
 
-action "build and test" {
+action "build" {
   uses = "./actions/seissol"
   args = [
    "compileMode=release",
@@ -17,9 +17,24 @@ action "build and test" {
    "-j8",
   ]
 }
-
+action "test" {
+  needs = "build"
+  uses = "./actions/seissol"
+  args = [
+   "compileMode=release",
+   "order=6",
+   "parallelization=hybrid",
+   "netcdf=yes",
+   "hdf5=yes",
+   "commThread=yes",
+   "compiler=gcc",
+   "unitTests=fast",
+   "-j8",
+   "check"
+  ]
+}
 action "download files"{
-  needs = "build and test"
+  needs = "test"
   uses = "./actions/seissol"
   runs = ["sh", "-c", "workflows/tpv33/scripts/download.sh"]
 }
