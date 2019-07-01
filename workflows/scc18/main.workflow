@@ -44,5 +44,5 @@ action "download" {
 action "execute" {
   needs = "download"
   uses = "./actions/seissol"
-  runs = ["sh", "-c","workflows/scc18/execute.sh"]
+  runs = ["sh", "-c","workflows/scc18/scripts/execute.sh"]
 }
