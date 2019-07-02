@@ -13,7 +13,7 @@ action "build" {
    "commThread=yes",
    "compiler=gcc",
    "unitTests=fast",
-   "-j8",
+   "-j1",
   ]
 }
 action "test" {
@@ -28,7 +28,7 @@ action "test" {
    "commThread=yes",
    "compiler=gcc",
    "unitTests=fast",
-   "-j8",
+   "-j1",
    "check"
   ]
 }
