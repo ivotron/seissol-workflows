@@ -11,7 +11,7 @@ action "build" {
    "parallelization=hybrid",
    "netcdf=yes",
    "hdf5=yes",
-   "commThread=yes",
+   "commThread=no",
    "compiler=gcc",
    "unitTests=fast",
    "-j1",
@@ -26,21 +26,21 @@ action "test" {
    "parallelization=hybrid",
    "netcdf=yes",
    "hdf5=yes",
-   "commThread=yes",
+   "commThread=no",
    "compiler=gcc",
    "unitTests=fast",
    "-j1",
    "check"
   ]
 }
-action "download files"{
+action "download"{
   needs = "test"
   uses = "./actions/seissol"
   runs = ["sh", "-c", "workflows/tpv33/scripts/download.sh"]
 }
 
 action "execute"{
-  needs = "download files"
+  needs = "download"
   uses = "./actions/seissol"
   runs = ["sh", "-c","workflows/tpv33/scripts/execute.sh"]
 }

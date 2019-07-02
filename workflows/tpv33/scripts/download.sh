@@ -3,7 +3,7 @@ set -e
 BASE_PATH="workflows/tpv33"
 
 
-mkdir -p ${BASE_PATH}/input-data
+mkdir -p ${BASE_PATH}/input-data/output
 pushd ${BASE_PATH}/input-data
 
 curl -o tpv33_gmsh.xdmf https://syncandshare.lrz.de/dl/fiEi52Xiwwqkf2sNpTrCHjhw/tpv33_gmsh.xdmf
