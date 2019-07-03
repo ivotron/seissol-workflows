@@ -1,0 +1,25 @@
+!Switch
+[mu_d, mu_s, d_c]: !ConstantMap
+  map:
+    mu_d: 0.25
+    mu_s: 0.3
+    d_c:  0.8
+[cohesion, forced_rupture_time]: !FunctionMap
+  map:
+    cohesion: |
+      cohesion = -400000.0;
+      zIncreasingCohesion = 10000.0;
+      if (z >= -zIncreasingCohesion) {
+        return cohesion - 1000000.0 * (z+zIncreasingCohesion)/zIncreasingCohesion;
+      }
+      return cohesion;
+    forced_rupture_time: |
+      r = sqrt(pow(x-805840.535894, 2.0) + pow(y-351890.152582, 2.0) + pow(z+29933.455647, 2.0));
+      r_crit = 12000.0;
+      Vs = 3800.0;
+      if (r <= r_crit) {
+        return r/(0.7*Vs)+(0.081.0*r_crit/(0.7.0*Vs))*(1.0/(1.0-pow(r/r_crit, 2.0))-1.0);
+      }
+      return 1000000000.0;
+[s_xx, s_yy, s_zz, s_xy, s_yz, s_xz]: !Include initial_stress.yaml
+

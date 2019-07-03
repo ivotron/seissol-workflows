@@ -15,4 +15,5 @@ tar -xzf Examples.tar.gz
 cp Examples-master/tpv33/* .
 rm -rf Examples-master Examples.tar.gz
 echo "$SEISSOL_PATH/Maple/" > DGPATH
+sed -i 's/EndTime = 12.0/EndTime = 0.00001/g' parameters_tpv33_master.par
 popd

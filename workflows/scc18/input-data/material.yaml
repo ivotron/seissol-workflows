@@ -1,0 +1,51 @@
+!Switch
+[bulkFriction]: !ConstantMap
+  map:
+    bulkFriction: 0.3
+[rho, mu, lambda]: !Any
+  components:
+    - !GroupFilter
+      groups: [2,4]
+      components: !ConstantMap
+        map:
+          rho:    2550
+          mu:     18589500000
+          lambda: 26571000000
+    - !GroupFilter
+      groups: 3
+      components: !ConstantMap
+        map:
+          rho:    2850
+          mu:     39016500000
+          lambda: 42379500000
+    - !GroupFilter
+      groups: 7
+      components: !ConstantMap
+        map:
+          rho:    3050
+          mu:     50027625000
+          lambda: 53695250000
+    - !GroupFilter
+      groups: 6
+      components: !ConstantMap
+        map:
+          rho:    3330
+          mu:     65942325000
+          lambda: 81235350000
+    - !GroupFilter
+      groups: [1,5]
+      components: !LayeredModel
+        map: !AffineMap
+          matrix:
+            z: [0.0, 0.0, 1.0]
+          translation:
+            z: 0
+        interpolation: lower
+        parameters: [rho, mu, lambda]
+        nodes:
+          -6000:  [2720, 33320000000, 31280000000]
+          -12000: [2860, 41298400000, 41984800000]
+          -23000: [3050, 46390500000, 60969500000]
+          -.inf:  [3330, 65942325000, 81235350000]
+[s_xx, s_yy, s_zz, s_xy, s_yz, s_xz, plastCo]: !Include initial_stress.yaml
+
