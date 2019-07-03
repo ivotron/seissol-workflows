@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-BASE_PATH="workflows/tpv33"
 
+BASE_PATH="$PWD/workflows/tpv33"
+SEISSOL_PATH="$PWD/seissol/"
 
 mkdir -p ${BASE_PATH}/input-data/output
 pushd ${BASE_PATH}/input-data
@@ -13,7 +14,5 @@ curl -o tpv33_gmsh https://syncandshare.lrz.de/dl/fi72mQiszp6vSs7qN8tdZJf9/tpv33
 tar -xzf Examples.tar.gz
 cp Examples-master/tpv33/* .
 rm -rf Examples-master Examples.tar.gz
-echo $PWD/Maple/ > DGPATH
+echo "$SEISSOL_PATH/Maple/" > DGPATH
 popd
-
-cp seissol/build/SeisSol_release_generatedKernels_dnoarch_hybrid_none_9_6 ${BASE_PATH}/input-data

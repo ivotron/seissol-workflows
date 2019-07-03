@@ -7,32 +7,36 @@ action "build" {
   uses = "./actions/seissol"
   args = [
    "compileMode=release",
-   "order=6",
+   "order=2",
    "parallelization=hybrid",
    "netcdf=yes",
    "hdf5=yes",
    "commThread=no",
    "compiler=gcc",
    "unitTests=fast",
-   "-j1",
+   "metis=yes",
+   "-j8",
   ]
 }
+
 action "test" {
   needs = "build"
   uses = "./actions/seissol"
   args = [
    "compileMode=release",
-   "order=6",
+   "order=2",
    "parallelization=hybrid",
    "netcdf=yes",
    "hdf5=yes",
    "commThread=no",
    "compiler=gcc",
    "unitTests=fast",
-   "-j1",
+   "metis=yes",
+   "-j8",
    "check"
   ]
 }
+
 action "download"{
   needs = "test"
   uses = "./actions/seissol"

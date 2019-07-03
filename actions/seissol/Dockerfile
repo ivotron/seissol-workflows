@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM ubuntu:disco
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -10,6 +10,7 @@ RUN apt update && \
       libopenmpi-dev \
       libhdf5-dev libhdf5-mpi-dev \
       libnetcdf-dev libnetcdf-mpi-dev \
+      libparmetis-dev \
       virtualenv && \
     virtualenv -p python3 /scons && \
     bash -c 'source /scons/bin/activate && pip install numpy>=1.12.0 lxml scons' && \
