@@ -9,11 +9,11 @@ pushd ${BASE_PATH}/input-data
 
 curl -o tpv33_gmsh.xdmf https://syncandshare.lrz.de/dl/fiEi52Xiwwqkf2sNpTrCHjhw/tpv33_gmsh.xdmf
 curl -o Examples.tar.gz "https://codeload.github.com/SeisSol/Examples/tar.gz/master"
-curl -o tpv33_gmsh https://syncandshare.lrz.de/dl/fi72mQiszp6vSs7qN8tdZJf9/tpv33_gmsh
+#curl -o tpv33_gmsh https://syncandshare.lrz.de/dl/fi72mQiszp6vSs7qN8tdZJf9/tpv33_gmsh
 
 tar -xzf Examples.tar.gz
 cp Examples-master/tpv33/* .
 rm -rf Examples-master Examples.tar.gz
 echo "$SEISSOL_PATH/Maple/" > DGPATH
-sed -i 's/EndTime = 12.0/EndTime = 0.00001/g' parameters_tpv33_master.par
+sed -i 's/EndTime = 12.0/EndTime = 0.0000001/g' parameters_tpv33_master.par
 popd
