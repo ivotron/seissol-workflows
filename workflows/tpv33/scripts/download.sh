@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 set -e
 
-BASE_PATH="$PWD/workflows/tpv33"
-SEISSOL_PATH="$PWD/seissol/"
+if [ -z "$SEISSOL_SRC_DIR" ]; then
+  echo "Expecting SEISSOL_SRC_DIR variable"
+  exit 1
+fi
 
-mkdir -p ${BASE_PATH}/input-data/output
-pushd ${BASE_PATH}/input-data
+mkdir -p "$GITHUB_WORKSPACE/workflows/tpv33/execution"
 
-curl -o tpv33_gmsh.xdmf https://syncandshare.lrz.de/dl/fiEi52Xiwwqkf2sNpTrCHjhw/tpv33_gmsh.xdmf
-curl -o Examples.tar.gz "https://codeload.github.com/SeisSol/Examples/tar.gz/master"
-#curl -o tpv33_gmsh https://syncandshare.lrz.de/dl/fi72mQiszp6vSs7qN8tdZJf9/tpv33_gmsh
+cd "$GITHUB_WORKSPACE/workflows/tpv33/execution"
 
-tar -xzf Examples.tar.gz
+curl -LO https://syncandshare.lrz.de/dl/fiEi52Xiwwqkf2sNpTrCHjhw/tpv33_gmsh.xdmf
+curl -LO https://syncandshare.lrz.de/dl/fi72mQiszp6vSs7qN8tdZJf9/tpv33_gmsh
+curl -LO https://github.com/SeisSol/Examples/archive/master.tar.gz
+
+tar xzf master.tar.gz
 cp Examples-master/tpv33/* .
-rm -rf Examples-master Examples.tar.gz
-echo "$SEISSOL_PATH/Maple/" > DGPATH
-sed -i 's/EndTime = 12.0/EndTime = 0.0000001/g' parameters_tpv33_master.par
-popd
+rm -rf Examples-master master.tar.gz
+
+echo "$GITHUB_WORKSPACE/$SEISSOL_SRC_DIR/Maple/" > DGPATH
