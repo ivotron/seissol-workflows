@@ -37,4 +37,4 @@ mpirun \
   --oversubscribe \
   -np "$MPI_NUM_PROCESSES" \
   "$SEISSOL_BIN" \
-  parameters_tpv33_master.par > output/out.txt
+  parameters_tpv33_master.par

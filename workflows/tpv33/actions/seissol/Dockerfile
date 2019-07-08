@@ -9,7 +9,6 @@ RUN apt update && \
       libeigen3-dev \
       libopenmpi-dev \
       libhdf5-dev libhdf5-mpi-dev \
-      libnetcdf-dev libnetcdf-mpi-dev \
       libparmetis-dev \
       virtualenv && \
     virtualenv -p python3 /scons && \
@@ -24,8 +23,6 @@ RUN curl -LO https://github.com/hfp/libxsmm/archive/master.tar.gz && \
     cp bin/libxsmm_gemm_generator /usr/bin && \
     cd / && \
     rm -rf libxsmm-master /var/lib/apt/lists/*
-
-ENV CPATH=/usr/lib/x86_64-linux-gnu/netcdf/mpi/include
 
 ADD entrypoint.sh /
 
