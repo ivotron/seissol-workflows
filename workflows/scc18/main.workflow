@@ -12,20 +12,25 @@ action "install dependencies" {
   needs = "remove previous builds"
   uses = "popperized/spack@master"
   args = [
+    "install", "--no-checksum",
     "netcdf-fortran",
-    "^netcdf@4.4.5", "+parallel-netcdf",
-    "^openmpi@4.0.1",
-    "^hdf@1.10.5 +fortran",
-    "^scons@3.0.5",
+    "openmpi@4.0.1",
+    "scons@3.0.5",
+    "hdf",
+    "netcdf+parallel-netcdf"
   ]
+  env = {
+    FORCE_UNSAFE_CONFIGURE = "1"
+  }
 }
 
 action "build" {
-  needs = "remove previous builds"
+  needs = "install dependencies"
   uses = "popperized/spack@master"
   runs = ["sh", "-c","workflows/scc18/scripts/install.sh"]
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol"
+    SCONS_NUM_BUILD_JOBS = "8"
   }
 }
 
