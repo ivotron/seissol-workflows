@@ -14,7 +14,7 @@ fi
 
 # FIXME: find paths to all dependencies
 scons=$(spack location -i scons@3.0.5)/bin/scons
-hdf5_dir=$(spack location -i hdf)
+hdf5_dir=$(spack location -i hdf5)
 netcdf_dir=$(spack location -i netcdf+parallel-netcdf)
 cd "$SEISSOL_SRC_DIR"
 

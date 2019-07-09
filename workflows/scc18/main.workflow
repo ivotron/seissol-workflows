@@ -12,12 +12,7 @@ action "install dependencies" {
   needs = "remove previous builds"
   uses = "popperized/spack@master"
   args = [
-    "install", "--no-checksum",
-    "netcdf-fortran",
-    "openmpi@4.0.1",
-    "scons@3.0.5",
-    "hdf",
-    "netcdf+parallel-netcdf"
+    "spack install --no-checksum netcdf+parallel-netcdf netcdf-fortran scons@3.0.5"
   ]
   env = {
     FORCE_UNSAFE_CONFIGURE = "1"
