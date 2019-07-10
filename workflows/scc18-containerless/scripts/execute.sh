@@ -29,8 +29,8 @@ mkdir -p "$EXECUTION_DIR/output"
 # run
 cd "$EXECUTION_DIR"
 
-sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters.par
+sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters_zenodo_easi.par
 mpirun \
   -np "$MPI_NUM_PROCESSES" \
   "./$SEISSOL_BIN_NAME" \
-  parameters.par > output/out.txt
+  parameters_zenodo_easi.par > output/out.txt

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+# download zenodo files
 file_list=""
 files=$(curl -H "Accept: application/json" \
         -H "Content-Type: application/json" \
@@ -19,3 +19,10 @@ for i in ${file_list}; do
     curl -LO https://zenodo.org/record/439946/files/"$i"
   fi
 done
+# download extra files
+
+wget https://github.com/SeisSol/SeisSol/files/3353667/sumatra_easi.zip
+unzip sumatra_easi.zip
+rm sumatra_easi.zip
+
+sed -i "s#FL = .*#FL = 16#" parameters_zenodo_easi.par
