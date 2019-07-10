@@ -31,11 +31,11 @@ action "download data and parameters"{
 action "execute"{
   needs = "download data and parameters"
   uses = "sh"
-  args = ["workflows/scc18-containerless/scripts/execute.sh"]
+  args = "workflows/scc18-containerless/scripts/execute.sh"
   env = {
-    SEISSOL_SRC_DIR = "submodules/seissol"
-    OMP_NUM_THREADS = 1
-    MPI_NUM_PROCESSES = 1
-    SEISSOL_END_TIME = 0.00001
+    SEISSOL_SRC_DIR = "submodules/seissol",
+    OMP_NUM_THREADS = "1",
+    MPI_NUM_PROCESSES = "1",
+    SEISSOL_END_TIME = "0.00001"
   }
 }
