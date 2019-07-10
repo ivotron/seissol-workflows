@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
-git clone https://github.com/SeisSol/SeisSol.git
-cd SeisSol
-git submodule update --init
+cd $SEISSOL_SRC_DIR
 scons compiler=gcc netcdf=yes hdf5=yes order=4 parallelization=hybrid
