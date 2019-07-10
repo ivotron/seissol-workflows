@@ -5,12 +5,12 @@ mkdir -p install
 
 # update .bashrc
 cat >> $HOME/.bashrc_ <<EOL
-export PATH=$HOME/bin:$PATH
-export LIBRARY_PATH=$HOME/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH=$PWD/install/bin:$PATH
+export LIBRARY_PATH=$PWD/install/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$PWD/install/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$PWD/install/lib/pkgconfig:$PKG_CONFIG_PATH
 export EDITOR=vi
-export CPATH=$HOME/include:$CPATH
+export CPATH=$PWD/install/include:$CPATH
 EOL
 source ~/.bashrc
 cd install
@@ -49,10 +49,10 @@ cd ..
 git clone https://github.com/hfp/libxsmm
 cd libxsmm
 make generator
-cp bin/libxsmm_gemm_generator $HOME/bin
+cp bin/libxsmm_gemm_generator $PWD/install/bin
 cd ..
 
 # installing pspamm
 
 git clone https://github.com/peterwauligmann/PSpaMM.git
-ln -s $(pwd)/PSpaMM/pspamm.py $HOME/bin
+ln -s $(pwd)/PSpaMM/pspamm.py $PWD/install/bin
