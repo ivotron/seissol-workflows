@@ -18,10 +18,10 @@ if [ -z "$SEISSOL_END_TIME" ]; then
   exit 1
 fi
 
-EXECUTION_DIR="workflows/scc18-containerless/execution/"
+EXECUTION_DIR="workflows/scc18-containerless/execution"
 
 SEISSOL_BIN="$(ls $SEISSOL_SRC_DIR/build/SeisSol_*)"
-
+SEISSOL_BIN_NAME=$(basename ${SEISSOL_BIN})
 cp "$SEISSOL_BIN" "$EXECUTION_DIR"
 
 mkdir -p "$EXECUTION_DIR/output"
@@ -31,8 +31,6 @@ cd "$EXECUTION_DIR"
 
 sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters.par
 mpirun \
-  --allow-run-as-root \
-  --oversubscribe \
   -np "$MPI_NUM_PROCESSES" \
-  "$SEISSOL_BIN" \
+  "./$SEISSOL_BIN_NAME" \
   parameters.par > output/out.txt
