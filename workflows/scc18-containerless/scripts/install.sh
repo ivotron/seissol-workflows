@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+set -e
+
+mkdir -p install
+
 # update .bashrc
 cat >> $HOME/.bashrc_ <<EOL
 export PATH=$HOME/bin:$PATH
@@ -8,7 +12,8 @@ export PKG_CONFIG_PATH=$HOME/lib/pkgconfig:$PKG_CONFIG_PATH
 export EDITOR=vi
 export CPATH=$HOME/include:$CPATH
 EOL
-exec bash
+source ~/.bashrc
+cd install
 # installing scons
 
 wget http://prdownloads.sourceforge.net/scons/scons-3.0.5.tar.gz
