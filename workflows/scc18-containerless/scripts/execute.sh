@@ -30,7 +30,9 @@ mkdir -p "$EXECUTION_DIR/output"
 cd "$EXECUTION_DIR"
 
 sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters_zenodo_easi.par
+echo "$SEISSOL_SRC_DIR/MAPLE" > DGPATH
 mpirun \
+  --oversubscribe \
   -np "$MPI_NUM_PROCESSES" \
   "./$SEISSOL_BIN_NAME" \
   parameters_zenodo_easi.par > output/out.txt
