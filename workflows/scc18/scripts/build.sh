@@ -12,7 +12,6 @@ fi
 
 # paths for seissol
 SPACK_VIEW="$PWD/spack/env/view/"
-export PATH="$SPACK_VIEW/bin:$PATH"
 export LIBRARY_PATH="$SPACK_VIEW/lib:$LIBRARY_PATH"
 export LD_LIBRARY_PATH="$SPACK_VIEW/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="$SPACK_VIEW/lib/pkgconfig:$PKG_CONFIG_PATH"

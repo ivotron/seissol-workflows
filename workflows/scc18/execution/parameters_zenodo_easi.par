@@ -12,7 +12,7 @@ BC_of = 1                    ! Absorbing boundaries
 /
 
 &DynamicRupture
-FL = 16                     ! Friction law (0: none, 1:self-similar crack, 2:LSW, 3:RS (aging), 4:RS (slip))
+FL = 16                      ! Friction law (0: none, 1:self-similar crack, 2:LSW, 3:RS (aging), 4:RS (slip))
 ModelFileName = 'fault.yaml'
 t_0 = 0.5
 GPwise = 1                  ! elementwise =0 ; GPwise =1
@@ -76,7 +76,7 @@ RFileName = '1003_topo30sec_wSplays_sim5_pumgenSM2_rec.dat'
 /
             
 &AbortCriteria
-EndTime = 0.00001
+EndTime = 1e-06
 /
 
 &Analysis

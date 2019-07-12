@@ -18,7 +18,7 @@ if [ -z "$SEISSOL_END_TIME" ]; then
   exit 1
 fi
 
-EXECUTION_DIR="$PWD/workflows/scc18/execution/"
+EXECUTION_DIR="$GITHUB_WORKSPACE/workflows/scc18/execution/"
 
 # TODO: we assume that there's only one binary in the build/ folder. Instead, we 
 # can look for a SEISSOL_BIN variable and use that if defined; otherwise we can 
@@ -28,15 +28,16 @@ SEISSOL_BIN="$(ls $GITHUB_WORKSPACE/$SEISSOL_SRC_DIR/build/SeisSol_*)"
 
 cp "$SEISSOL_BIN" "$EXECUTION_DIR"
 
-mkdir -p "$EXECUTION_DIR/output"
-
-sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters.par
-
-# run
 cd "$EXECUTION_DIR"
+
+mkdir -p output/
+
+echo "$GITHUB_WORKSPACE/$SEISSOL_SRC_DIR/Maple/" > DGPATH
+sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters_zenodo_easi.par
+
 mpirun \
   --allow-run-as-root \
   --oversubscribe \
   -np "$MPI_NUM_PROCESSES" \
   "$SEISSOL_BIN" \
-  parameters.par > output/out.txt
+  parameters_zenodo_easi.par > output/out.txt

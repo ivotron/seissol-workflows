@@ -5,7 +5,9 @@ workflow "scc18" {
 
 action "remove previous builds" {
   uses = "actions/bin/sh@master"
-  args = ["rm -f submodules/seissol/build/SeisSol_*"]
+  args = [
+    "rm -rf submodules/seissol/build/SeisSol_* submodules/seissol/.scon*"
+  ]
 }
 
 action "install dependencies" {
@@ -23,13 +25,13 @@ action "install dependencies" {
 action "install scons" {
   needs = "remove previous builds"
   uses = "popperized/spack@python3"
-  runs = ["sh", "-c","workflows/scc18/scripts/install-scons.sh"]
+  args = "workflows/scc18/scripts/install-scons.sh"
 }
 
 action "build" {
   needs = ["install dependencies", "install scons"]
   uses = "popperized/spack@python3"
-  runs = ["sh", "-c","workflows/scc18/scripts/build.sh"]
+  args = "workflows/scc18/scripts/build.sh"
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol"
     SCONS_NUM_BUILD_JOBS = "8"
@@ -48,7 +50,7 @@ action "download input data"{
 action "execute"{
   needs = "download input data"
   uses = "popperized/spack@python3"
-  runs = ["sh", "-c","workflows/scc18/scripts/execute.sh"]
+  args = "workflows/scc18/scripts/execute.sh"
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol"
     OMP_NUM_THREADS = 1
