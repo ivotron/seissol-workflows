@@ -47,7 +47,7 @@ action "download input data"{
 
 action "execute"{
   needs = "download input data"
-  uses = "popperized/spack@master"
+  uses = "popperized/spack@python3"
   runs = ["sh", "-c","workflows/scc18/scripts/execute.sh"]
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol"
