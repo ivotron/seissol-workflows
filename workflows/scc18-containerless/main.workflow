@@ -13,6 +13,12 @@ action "install dependencies" {
   args = "workflows/scc18-containerless/scripts/install.sh"
 }
 
+action "setup venv" {
+  needs = "install dependencies"
+  uses = "sh"
+  args = "workflows/scc18-containerless/scripts/setup-venv.sh"
+}
+
 action "build" {
   needs = "install dependencies"
   uses = "sh"
