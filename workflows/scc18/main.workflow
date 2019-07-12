@@ -6,7 +6,7 @@ workflow "scc18" {
 action "remove previous builds" {
   uses = "actions/bin/sh@master"
   args = [
-    "rm -rf submodules/seissol/build/SeisSol_* submodules/seissol/.scon*"
+    "rm -rf submodules/seissol/build/ submodules/seissol/.scon*"
   ]
 }
 

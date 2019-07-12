@@ -58,7 +58,7 @@ ClusteredLTS = 2
 &Output
 OutputFile = 'output/sumatra'
 checkPointFile = 'checkpoint/sumatra'
-checkPointInterval = 100
+checkPointInterval = 0
 checkPointBackend = 'posix'
 iOutputMask = 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 
 iOutputMaskMaterial = 1 1 1         ! Material output
