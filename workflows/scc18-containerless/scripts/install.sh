@@ -4,12 +4,12 @@ set -e
 mkdir -p $PWD/workflows/scc18-containerless/install
 
 # update .bashrc
-
-export PATH=$PWD/workflows/scc18-containerless/install/bin:$PATH
-export LIBRARY_PATH=$PWD/workflows/scc18-containerless/install/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$PWD/workflows/scc18-containerless/install/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$PWD/workflows/scc18-containerless/install/lib/pkgconfig:$PKG_CONFIG_PATH
-export CPATH=$PWD/workflows/scc18-containerless/install/include:$CPATH
+source ./setup-env.sh
+#export PATH=$PWD/workflows/scc18-containerless/install/bin:$PATH
+#export LIBRARY_PATH=$PWD/workflows/scc18-containerless/install/lib:$LIBRARY_PATH
+#export LD_LIBRARY_PATH=$PWD/workflows/scc18-containerless/install/lib:$LD_LIBRARY_PATH
+#export PKG_CONFIG_PATH=$PWD/workflows/scc18-containerless/install/lib/pkgconfig:$PKG_CONFIG_PATH
+#export CPATH=$PWD/workflows/scc18-containerless/install/include:$CPATH
 
 INSTALL_DIR=$PWD/workflows/scc18-containerless/install
 cd $INSTALL_DIR
