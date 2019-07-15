@@ -11,8 +11,8 @@ for file in $files; do
     file_list=$file_list$file,
 done
 IFS=','
-mkdir -p workflows/scc18-containerless/execution/
-cd workflows/scc18-containerless/execution/
+mkdir -p workflows/scc18-containerless/input/
+cd workflows/scc18-containerless/input/
 for i in ${file_list}; do
   echo "$i"
   if [[ ! -e "$i" ]]; then
