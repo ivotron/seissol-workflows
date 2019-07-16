@@ -5,5 +5,5 @@ if [ -z "$SEISSOL_SRC_DIR" ]; then
   exit 1
 fi
 cd $SEISSOL_SRC_DIR
-git checkout master
+
 scons compiler=gcc netcdf=yes hdf5=yes order=4 parallelization=hybrid -j8
