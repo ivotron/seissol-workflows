@@ -7,8 +7,14 @@ action "remove previous builds" {
   args = ["rm -f submodules/seissol/build/SeisSol_*"]
 }
 
-action "install dependencies" {
+action "checkout master branch" {
   needs = "remove previous builds"
+  uses = "sh"
+  args = "git -C submodules/seissol checkout master"
+}
+
+action "install dependencies" {
+  needs = "checkout master branch"
   uses = "sh"
   args = "workflows/scc18-containerless/scripts/install-deps.sh"
 }
