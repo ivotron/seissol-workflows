@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p $PWD/workflows/scc18-containerless/install
+BASE_PATH="$PWD/workflows/scc18-containerless"
 
-source $PWD/workflows/scc18-containerless/scripts/setup-env.sh
+source "$BASE_PATH/scripts/setup-env.sh"
 
-INSTALL_DIR=$PWD/workflows/scc18-containerless/install
-cd $INSTALL_DIR
+INSTALL_DIR="$BASE_PATH/install"
+
+cd "$INSTALL_DIR"
+
 # installing scons
 
 wget http://prdownloads.sourceforge.net/scons/scons-3.0.5.tar.gz
@@ -39,7 +41,7 @@ cd ..
 
 # instaling libxsmm
 
-git clone https://github.com/hfp/libxsmm
+git clone https://github.com/hfp/libxsmm || true
 cd libxsmm
 make generator
 cp bin/libxsmm_gemm_generator $INSTALL_DIR/bin

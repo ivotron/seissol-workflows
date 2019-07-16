@@ -18,21 +18,26 @@ if [ -z "$SEISSOL_END_TIME" ]; then
   exit 1
 fi
 
-INPUT_DIR="workflows/scc18-containerless/input"
+REPO_DIR="$PWD/"
+BASE_PATH="$REPO_DIR/workflows/scc18-containerless"
+EXECUTION_DIR="$BASE_PATH/execution"
 
-SEISSOL_BIN="$(ls $SEISSOL_SRC_DIR/build/SeisSol_*)"
-SEISSOL_BIN_NAME=$(basename ${SEISSOL_BIN})
-cp "$SEISSOL_BIN" "$INPUT_DIR"
+source "$BASE_PATH/scripts/setup-env.sh"
 
-mkdir -p "$INPUT_DIR/../output"
+SEISSOL_BIN="$(ls $REPO_DIR/$SEISSOL_SRC_DIR/build/SeisSol_*)"
+cp "$SEISSOL_BIN" "$EXECUTION_DIR"
+
+mkdir -p "$EXECUTION_DIR/output"
 
 # run
-cd "$INPUT_DIR"
+cd "$EXECUTION_DIR"
 
 sed -i "s#EndTime = .*#EndTime = $SEISSOL_END_TIME#" parameters_zenodo_easi.par
-echo "$SEISSOL_SRC_DIR/Maple/" > DGPATH
+
+echo "$REPO_DIR/$SEISSOL_SRC_DIR/Maple/" > DGPATH
+
 mpirun \
   --oversubscribe \
   -np "$MPI_NUM_PROCESSES" \
-  "./$SEISSOL_BIN_NAME" \
-  parameters_zenodo_easi.par > ../output/out.txt
+  "$SEISSOL_BIN" \
+  parameters_zenodo_easi.par > output/stdout.txt

@@ -10,19 +10,13 @@ action "remove previous builds" {
 action "install dependencies" {
   needs = "remove previous builds"
   uses = "sh"
-  args = "workflows/scc18-containerless/scripts/install.sh"
-}
-
-action "setup venv" {
-  needs = "install dependencies"
-  uses = "sh"
-  args = "workflows/scc18-containerless/scripts/setup-venv.sh"
+  args = "workflows/scc18-containerless/scripts/install-deps.sh"
 }
 
 action "build" {
   needs = "install dependencies"
   uses = "sh"
-  args = "workflows/scc18-containerless/scripts/build.sh"
+  args = "workflows/scc18-containerless/scripts/compile.sh"
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol"
   }
@@ -31,17 +25,17 @@ action "build" {
 action "download data and parameters"{
   needs = "build"
   uses = "sh"
-  args = "workflows/scc18-containerless/scripts/download.sh"
+  args = "workflows/scc18-containerless/scripts/download-input.sh"
 }
 
-action "execute"{
+action "execute" {
   needs = "download data and parameters"
   uses = "sh"
-  args = "workflows/scc18-containerless/scripts/execute.sh"
+  args = "workflows/scc18-containerless/scripts/run.sh"
   env = {
     SEISSOL_SRC_DIR = "submodules/seissol",
     OMP_NUM_THREADS = "1",
-    MPI_NUM_PROCESSES = "1",
+    MPI_NUM_PROCESSES = "20",
     SEISSOL_END_TIME = "0.00001"
   }
 }
