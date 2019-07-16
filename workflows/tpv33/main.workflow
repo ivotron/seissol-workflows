@@ -9,12 +9,13 @@ action "remove previous builds" {
 }
 
 action "checkout gcc8-fix branch" {
+  needs = "remove previous builds"
   uses = "popperized/git@master"
-  args = ["git -C submodules/seissol checkout gcc8-fix"]
+  args = ["-C submodules/seissol checkout gcc8-fix"]
 }
 
 action "build" {
-  needs = "remove previous builds"
+  needs = "checkout gcc8-fix branch"
   uses = "./workflows/tpv33/actions/seissol"
   args = [
    "compileMode=release",
