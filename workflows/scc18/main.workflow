@@ -29,12 +29,13 @@ action "install dependencies" {
 }
 
 action "install scons" {
+  needs = "install dependencies"
   uses = "popperized/spack@python3"
   args = "workflows/scc18/scripts/install-scons.sh"
 }
 
 action "build" {
-  needs = ["install dependencies", "install scons"]
+  needs = "install scons"
   uses = "popperized/spack@python3"
   args = "workflows/scc18/scripts/build.sh"
   env = {
