@@ -1,10 +1,10 @@
-workflow "scc18" {
+workflow "scc18-containerless" {
   resolves = "execute"
 }
 
 action "remove previous builds" {
   uses = "sh"
-  args = ["rm -f submodules/seissol/build/SeisSol_*"]
+  args = ["rm -rf submodules/seissol/build/ submodules/seissol/.scon*"]
 }
 
 action "checkout master branch" {
@@ -28,14 +28,15 @@ action "build" {
   }
 }
 
-action "download data and parameters"{
+action "download input data"{
   needs = "build"
   uses = "sh"
   args = "workflows/scc18-containerless/scripts/download-input.sh"
 }
 
+# MPI_NUM_PROCESSES needs to be a multiple of 20
 action "execute" {
-  needs = "download data and parameters"
+  needs = "download input data"
   uses = "sh"
   args = "workflows/scc18-containerless/scripts/run.sh"
   env = {
