@@ -10,8 +10,14 @@ action "remove previous builds" {
   ]
 }
 
-action "install dependencies" {
+action "checkout master branch" {
   needs = "remove previous builds"
+  uses = "popperized/git@master"
+  args = ["-C submodules/seissol checkout master"]
+}
+
+action "install dependencies" {
+  needs = "checkout master branch"
   uses = "popperized/spack@python3"
   args = [
     "spack", "install",
@@ -23,7 +29,6 @@ action "install dependencies" {
 }
 
 action "install scons" {
-  needs = "remove previous builds"
   uses = "popperized/spack@python3"
   args = "workflows/scc18/scripts/install-scons.sh"
 }
