@@ -14,7 +14,7 @@ action "install dependencies" {
   needs = "remove previous builds"
   uses = "popperized/spack@python3"
   args = [
-    "spack", "install", "-j8",
+    "spack", "install",
     "netcdf@4.4.1+mpi ^openmpi@4.0.1 ^hdf5@1.10.5+mpi+fortran+hl",
     "libxsmm@1.12.1+generator",
     "pkg-config@0.29.2",
@@ -47,6 +47,7 @@ action "download input data"{
   }
 }
 
+# MPI_NUM_PROCESSES needs to be a multiple of 20
 action "execute"{
   needs = "download input data"
   uses = "popperized/spack@python3"
