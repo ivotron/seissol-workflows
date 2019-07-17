@@ -13,9 +13,8 @@ that showcase how to execute:
  1. A SCEC benchmark ([`workflows/tpv33`](./workflows/tpv33)).
  2. The [SCC18 challenge workflow][scc18] 
     ([`workflows/scc18`](./workflows/scc18)).
- 3. The SCC18 challenge workflow on environments where build-time 
-    dependencies are installed externally (e.g. by system 
-    administrators). 
+ 3. The SCC18 on environments where a container runtime is not 
+    available 
     ([`workflows/scc18-containerless`](./workflows/scc18-containerless)).
 
 The first two workflows run in a container runtime ([Docker][docker], 
