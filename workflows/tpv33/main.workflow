@@ -5,7 +5,9 @@ workflow "tpv33" {
 
 action "remove previous builds" {
   uses = "actions/bin/sh@master"
-  args = ["rm -f submodules/seissol/build/SeisSol_*"]
+  args = [
+    "rm -rf submodules/seissol/build/ submodules/seissol/.scon*"
+  ]
 }
 
 action "checkout gcc8-fix branch" {
